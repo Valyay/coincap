@@ -1,0 +1,22 @@
+{
+    "extends": [
+      "prettier",
+      "eslint:recommended",
+    "plugin:react/recommended"
+    ],
+    "rules": {
+      "jsx-quotes": [
+        1,
+        "prefer-double"
+      ]
+    },
+    "env": {
+      "browser": true,
+      "node": true,
+    },
+    "parser": "babel-eslint",
+    "plugins": [
+      "prettier",
+      "react"
+  ]
+  }

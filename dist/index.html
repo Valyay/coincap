@@ -1,8 +1,9 @@
 Html Webpack Plugin:
 <pre>
   Error: Child compilation failed:
-  Entry module not found: Error: Can't resolve '/Users/valyay/projects/coincap/src/index.html' in '/Users/valyay/projects/coinc  ap':
-  Error: Can't resolve '/Users/valyay/projects/coincap/src/index.html' in '/Users/valyay/projects/coincap'
+  Module build failed (from ./node_modules/html-webpack-plugin/lib/loader.js):
+  Error: ENOENT: no such file or directory, open '/Users/valyay/projects/coincap/index.html':
+  Error: ENOENT: no such file or directory, open '/Users/valyay/projects/coincap/index.html'
   
   - compiler.js:79 childCompiler.runAsChild
     [coincap]/[html-webpack-plugin]/lib/compiler.js:79:16
@@ -75,7 +76,7 @@ Html Webpack Plugin:
   - Compilation.js:1148 _addModuleChain
     [coincap]/[webpack]/lib/Compilation.js:1148:12
   
-  - Compilation.js:1007 errorAndCallback.bail.err
-    [coincap]/[webpack]/lib/Compilation.js:1007:6
+  - Compilation.js:1060 processModuleDependencies.err
+    [coincap]/[webpack]/lib/Compilation.js:1060:9
   
-</pre><script type="text/javascript" src="index_bundle.js"></script>
+</pre>

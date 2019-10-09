@@ -1,82 +1,33 @@
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 
-class Table extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dataCoins: []
-    };
-  }
-
-  componentDidMount() {
-    const options = {
-      method: "GET",
-      hostname: "api.coincap.io",
-      path: "/v2/assets",
-      headers: {}
-    };
-
-    fetch("https://api.coincap.io/v2/assets", options)
-      .then(response => response.json())
-      .then(({ data }) => {
-        this.setState({ dataCoins: data });
-        return data;
-      })
-      .catch(error => console.error("Error:", error));
-  }
-
-  renderTableData() {
-    return this.state.dataCoins.map(coin => {
-      const {
-        rank,
-        id,
-        name,
-        priceUsd,
-        marketCapUsd,
-        changePercent24Hr
-      } = coin;
-      return (
-        <tr key={id}>
-          <td>{rank}</td>
-          <td>{name}</td>
-          <td>{priceUsd}</td>
-          <td>{marketCapUsd}</td>
-          <td>{changePercent24Hr}</td>
+export function Table(props) {
+  return (
+    <table className="table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Market Cap</th>
+          <th>Change (24Hr)</th>
         </tr>
-      );
-    });
-  }
-
-  renderTableHeader() {
-    if (this.state.dataCoins.length !== 0) {
-      let coin = Object.values(this.state.dataCoins)[0];
-      delete coin.id;
-      delete coin.maxSupply;
-      delete coin.supply;
-      delete coin.symbol;
-      delete coin.volumeUsd24Hr;
-      delete coin.vwap24Hr;
-
-      let header = Object.keys(coin);
-      return header.map((key, index) => {
-        return <th key={index}>{key.toUpperCase()}</th>;
-      });
-    }
-  }
-
-  render() {
-    return (
-      <div>
-        <h1 id="title">React Dynamic Table</h1>
-        <table id="students">
-          <tbody>
-            <tr>{this.renderTableHeader()}</tr>
-            {this.renderTableData()}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
+      </thead>
+      <tbody>
+        {props.dataCoins.map(coin => (
+          <tr key={coin.id}>
+            <td>{coin.rank}</td>
+            <td>{coin.name}</td>
+            <td>{coin.priceUsd}</td>
+            <td>{coin.marketCapUsd}</td>
+            <td>{coin.changePercent24Hr}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
 }
 
-export default Table;
+Table.propTypes = {
+  dataCoins: PropTypes.array
+};

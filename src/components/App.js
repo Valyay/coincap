@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import _ from "lodash";
 import { Table } from "./Table";
 import "../styles/App.css";
 
@@ -6,7 +7,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataCoins: []
+      dataCoins: [],
+      sort: "asc",
+      sortField: "id"
     };
   }
 
@@ -27,10 +30,22 @@ class App extends Component {
       .catch(error => console.error("Error:", error));
   }
 
+  onSort = sortField => {
+    const cloneData = this.state.dataCoins.concat();
+    const sortType = this.state.sort === "asc" ? "desc" : "asc";
+    const orderedData = _.orderBy(cloneData, sortField, sortType);
+
+    this.setState({
+      dataCoins: orderedData,
+      sort: sortType,
+      sortField
+    });
+  };
+
   render() {
     return (
       <div className="container">
-        <Table dataCoins={this.state.dataCoins} />
+        <Table dataCoins={this.state.dataCoins} onSort={this.onSort} />
       </div>
     );
   }

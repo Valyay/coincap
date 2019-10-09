@@ -6,11 +6,13 @@ export function Table(props) {
     <table className="table">
       <thead>
         <tr>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Market Cap</th>
-          <th>Change (24Hr)</th>
+          <th onClick={props.onSort.bind(null, "rank")}>Rank</th>
+          <th onClick={props.onSort.bind(null, "name")}>Name</th>
+          <th onClick={props.onSort.bind(null, "priceUsd")}>Price</th>
+          <th onClick={props.onSort.bind(null, "marketCapUsd")}>Market Cap</th>
+          <th onClick={props.onSort.bind(null, "changePercent24Hr")}>
+            Change (24Hr)
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -29,5 +31,6 @@ export function Table(props) {
 }
 
 Table.propTypes = {
-  dataCoins: PropTypes.array
+  dataCoins: PropTypes.array,
+  onSort: PropTypes.func
 };

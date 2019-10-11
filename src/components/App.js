@@ -24,7 +24,13 @@ class App extends Component {
     fetch("https://api.coincap.io/v2/assets", options)
       .then(response => response.json())
       .then(({ data }) => {
-        this.setState({ dataCoins: data, isLoading: false });
+        data.map(coin => {
+          coin.rank = parseInt(coin.rank);
+          coin.priceUsd = parseFloat(coin.priceUsd);
+          coin.marketCapUsd = parseFloat(coin.marketCapUsd);
+          coin.changePercent24Hr = parseFloat(coin.changePercent24Hr);
+        });
+        this.setState({ dataCoins: data });
         return data;
       })
       .catch(error => console.error("Error:", error));

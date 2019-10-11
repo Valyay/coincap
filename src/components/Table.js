@@ -6,12 +6,31 @@ export function Table(props) {
     <table className="table">
       <thead>
         <tr>
-          <th onClick={props.onSort.bind(null, "rank")}>Rank</th>
-          <th onClick={props.onSort.bind(null, "name")}>Name</th>
-          <th onClick={props.onSort.bind(null, "priceUsd")}>Price</th>
-          <th onClick={props.onSort.bind(null, "marketCapUsd")}>Market Cap</th>
+          <th onClick={props.onSort.bind(null, "rank")}>
+            Rank{" "}
+            {props.sortField === "rank" ? <small>{props.sort}</small> : null}
+          </th>
+          <th onClick={props.onSort.bind(null, "name")}>
+            Name{" "}
+            {props.sortField === "name" ? <small>{props.sort}</small> : null}
+          </th>
+          <th onClick={props.onSort.bind(null, "priceUsd")}>
+            Price{" "}
+            {props.sortField === "priceUsd" ? (
+              <small>{props.sort}</small>
+            ) : null}
+          </th>
+          <th onClick={props.onSort.bind(null, "marketCapUsd")}>
+            Market Cap{" "}
+            {props.sortField === "marketCapUsd" ? (
+              <small>{props.sort}</small>
+            ) : null}
+          </th>
           <th onClick={props.onSort.bind(null, "changePercent24Hr")}>
-            Change (24Hr)
+            Change (24Hr){" "}
+            {props.sortField === "changePercent24Hr" ? (
+              <small>{props.sort}</small>
+            ) : null}
           </th>
         </tr>
       </thead>
@@ -36,5 +55,7 @@ export function Table(props) {
 
 Table.propTypes = {
   dataCoins: PropTypes.array,
-  onSort: PropTypes.func
+  onSort: PropTypes.func,
+  sortField: PropTypes.string,
+  sort: PropTypes.string
 };

@@ -9,7 +9,7 @@ class App extends Component {
     this.state = {
       dataCoins: [],
       sort: "asc",
-      sortField: "id"
+      sortField: "rank"
     };
   }
 
@@ -30,7 +30,9 @@ class App extends Component {
           coin.marketCapUsd = parseFloat(coin.marketCapUsd);
           coin.changePercent24Hr = parseFloat(coin.changePercent24Hr);
         });
-        this.setState({ dataCoins: data });
+        this.setState({
+          dataCoins: _.orderBy(data, this.state.sortField, this.state.sort)
+        });
         return data;
       })
       .catch(error => console.error("Error:", error));
@@ -51,7 +53,12 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <Table dataCoins={this.state.dataCoins} onSort={this.onSort} />
+        <Table
+          dataCoins={this.state.dataCoins}
+          onSort={this.onSort}
+          sort={this.state.sort}
+          sortField={this.state.sortField}
+        />
       </div>
     );
   }

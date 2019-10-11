@@ -22,7 +22,11 @@ export function Table(props) {
             <td>{coin.name}</td>
             <td>{coin.priceUsd}</td>
             <td>{coin.marketCapUsd}</td>
-            <td>{coin.changePercent24Hr}</td>
+            {coin.changePercent24Hr >= 0 ? (
+              <td style={{ color: "green" }}>{coin.changePercent24Hr}</td>
+            ) : (
+              <td style={{ color: "red" }}>{coin.changePercent24Hr}</td>
+            )}
           </tr>
         ))}
       </tbody>

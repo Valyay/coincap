@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 
 export function Table(props) {
   return (
@@ -7,30 +9,23 @@ export function Table(props) {
       <thead>
         <tr>
           <th onClick={props.onSort.bind(null, "rank")}>
-            Rank{" "}
-            {props.sortField === "rank" ? <small>{props.sort}</small> : null}
+            Rank {props.sortField === "rank" ? setIcon(props.sort) : null}
           </th>
           <th onClick={props.onSort.bind(null, "name")}>
-            Name{" "}
-            {props.sortField === "name" ? <small>{props.sort}</small> : null}
+            Name {props.sortField === "name" ? setIcon(props.sort) : null}
           </th>
           <th onClick={props.onSort.bind(null, "priceUsd")}>
-            Price{" "}
-            {props.sortField === "priceUsd" ? (
-              <small>{props.sort}</small>
-            ) : null}
+            Price {props.sortField === "priceUsd" ? setIcon(props.sort) : null}
           </th>
           <th onClick={props.onSort.bind(null, "marketCapUsd")}>
             Market Cap{" "}
-            {props.sortField === "marketCapUsd" ? (
-              <small>{props.sort}</small>
-            ) : null}
+            {props.sortField === "marketCapUsd" ? setIcon(props.sort) : null}
           </th>
           <th onClick={props.onSort.bind(null, "changePercent24Hr")}>
             Change (24Hr){" "}
-            {props.sortField === "changePercent24Hr" ? (
-              <small>{props.sort}</small>
-            ) : null}
+            {props.sortField === "changePercent24Hr"
+              ? setIcon(props.sort)
+              : null}
           </th>
         </tr>
       </thead>
@@ -51,6 +46,14 @@ export function Table(props) {
       </tbody>
     </table>
   );
+}
+
+function setIcon(sort) {
+  if (sort === "asc") {
+    return <ArrowDropUpIcon></ArrowDropUpIcon>;
+  } else {
+    return <ArrowDropDownIcon></ArrowDropDownIcon>;
+  }
 }
 
 Table.propTypes = {

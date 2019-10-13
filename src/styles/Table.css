@@ -1,0 +1,10 @@
+th {
+    position: sticky;
+    top: 0;
+    cursor: pointer;
+}
+@media (max-width: 500px){
+    .rank, .marketCapUsd, .changePercent24Hr{
+        display: none;
+    }
+}

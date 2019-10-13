@@ -26,9 +26,11 @@ class App extends Component {
       .then(({ data }) => {
         data.map(coin => {
           coin.rank = parseInt(coin.rank);
-          coin.priceUsd = parseFloat(coin.priceUsd);
-          coin.marketCapUsd = parseFloat(coin.marketCapUsd);
-          coin.changePercent24Hr = parseFloat(coin.changePercent24Hr);
+          coin.priceUsd = +parseFloat(coin.priceUsd).toFixed(4);
+          coin.marketCapUsd = parseInt(coin.marketCapUsd);
+          coin.changePercent24Hr = +parseFloat(coin.changePercent24Hr).toFixed(
+            2
+          );
         });
         this.setState({
           dataCoins: _.orderBy(data, this.state.sortField, this.state.sort)

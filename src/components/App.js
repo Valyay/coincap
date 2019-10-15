@@ -35,9 +35,31 @@ class App extends Component {
         this.setState({
           dataCoins: _.orderBy(data, this.state.sortField, this.state.sort)
         });
-        return data;
+        const currencies = this.state.dataCoins.map(item => item.id).join(",");
+        this.updatePrices(currencies);
       })
       .catch(error => console.error("Error:", error));
+  }
+
+  updatePrices(list) {
+    const priceWs = new WebSocket(`wss://ws.coincap.io/prices?assets=${list}`);
+
+    priceWs.onmessage = message => {
+      const price = JSON.parse(message.data);
+
+      this.setState(currentState => {
+        return {
+          dataCoins: currentState.dataCoins.map(coin => {
+            for (let key in price) {
+              if (key === coin.id) {
+                coin.priceUsd = +parseFloat(price[key]).toFixed(4);
+              }
+            }
+            return coin;
+          })
+        };
+      });
+    };
   }
 
   onSort = sortField => {
